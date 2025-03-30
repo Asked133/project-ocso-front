@@ -4,6 +4,7 @@ import { TOKEN_NAME } from "@/constants";
 import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocation";
 import { Select, SelectItem } from "@heroui/react";
+import LocationCard from "./_components/LocationCard";
 
 const LocationsPage = async ({searchParams}: {searchParams: {[key: string]: string | string[]|undefined}}) => {
   const userCookies = cookies();
@@ -29,9 +30,10 @@ const LocationsPage = async ({searchParams}: {searchParams: {[key: string]: stri
     <div className="w-2/12">
       <div className="w-full flex flex-col items-center h-[90vh] bg-red-50">
         <div className="w-1/2 my-10">
-        {searchParams.store ? (
-          <SelectLocation locations={data} store={searchParams?.store}/>
-        ): <p className="w-full text-2xl px-2 text-center mt-10">Selecciona una tienda para ver los empleados</p>}
+          <SelectLocation locations={data} store={searchParams.store}/>
+        </div>
+        <div className="w-8/12">
+          <LocationCard store={searchParams.store}/>
         </div>
       </div>
     </div>
