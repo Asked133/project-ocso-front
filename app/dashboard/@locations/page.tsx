@@ -7,15 +7,15 @@ import { Select, SelectItem } from "@heroui/react";
 import LocationCard from "./_components/LocationCard";
 import { API_URL } from "@/constants";
 import FormNewLocation from "./_components/FormNewLocation";
+import DeleteLocationButton from "./_components/DeleteLocationButton";
+import { authHeaders } from "@/helpers/authHeaders";
 
 const LocationsPage = async ({searchParams}: {searchParams: {[key: string]: string | string[]|undefined}}) => {
-  const userCookies = cookies();
-  const token = userCookies.get(TOKEN_NAME)?.value;
   let { data } = await axios.get<Location[]>(
     `${API_URL}/locations`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        ...authHeaders()
       },
     }
   );
@@ -37,7 +37,10 @@ const LocationsPage = async ({searchParams}: {searchParams: {[key: string]: stri
         <div className="w-8/12">
           <LocationCard store={searchParams.store}/>
         </div>
-        <FormNewLocation/>
+        <div className="w-6/12">
+        <FormNewLocation store={searchParams.store}/>
+        </div>
+        <DeleteLocationButton store ={searchParams.store}/>
       </div>
     </div>
   );

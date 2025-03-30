@@ -4,7 +4,7 @@ import { API_URL, TOKEN_NAME } from "@/constants";
 import axios from "axios";
 import { cookies } from "next/headers";
 
-export async function createLocation(formData: FormData) {
+export default async function createLocation(formData: FormData) {
     const token = cookies().get(TOKEN_NAME)?.value
     let location: any = {};
     let locationLatLng = [0,0];
