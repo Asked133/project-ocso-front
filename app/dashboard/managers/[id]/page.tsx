@@ -3,6 +3,8 @@ import { Manager } from "@/entities";
 import { authHeaders } from "@/helpers/authHeaders";
 import ManagerCard from "./_components/ManagerCard";
 import DeleteManagerButton from "./_components/DeleteManagerButton";
+import FormUpdateManager from "./_components/FormUpdateManager";
+import UpdateManager from "./_components/UpdateManager";
 
 export default async function ManagerPage({
   params,
@@ -26,6 +28,9 @@ export default async function ManagerPage({
       <ManagerCard manager={data}/>
       <div className="bg-white shadow-medium rounded-md px-10 py-2">
         <DeleteManagerButton managerId={data.managerId}/>
+        <UpdateManager>
+          <FormUpdateManager manager={data}/>
+        </UpdateManager>
       </div>
     </div>
   );
