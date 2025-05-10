@@ -1,4 +1,3 @@
-
 'use client'
 
 import { Location } from "@/entities"
@@ -15,7 +14,7 @@ export default function SelectStore({ stores, defaultStore }: { stores: Location
         <Select label="Tienda" name="location" defaultSelectedKeys={defaultStore ? [defaultStore] : undefined} disabledKeys={disabledStores}>
             {
                 stores.map((store: Location) => (
-                    <SelectItem key={store.locationId}>
+                    <SelectItem key={String(store.locationId)}>
                         {store.locationName}
                     </SelectItem>
                 ))
