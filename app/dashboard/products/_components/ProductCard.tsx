@@ -1,10 +1,9 @@
-
 import { Product } from "@/entities";
 import { Card, CardBody, CardHeader, Divider } from "@heroui/react";
 
 export default function ProductCard ({product} : {product: Product}) {
     return (
-        <Card className="hover:scale-110 max-w-[350px]">
+        <Card className="max-w-[350px]">
             <CardHeader> {product.productName} </CardHeader>
             <Divider/>
             <CardBody>
