@@ -1,30 +1,61 @@
-import updateManager from "@/actions/managers/update";
 import { Manager } from "@/entities";
+import updateManager from "@/actions/managers/delete";
 import { Button, Input } from "@heroui/react";
-export default function FormUpdateManager({manager}: {manager: Manager}){
-    const updateManagerWithId = updateManager.bind(null, manager.managerId);
+import SelectStore from "./SelectStore";
+import { API_URL } from "@/constants";
+import { authHeaders } from "@/helpers/authHeaders";
+
+export default async function FormUpdateManager({ manager }: { manager: Manager }) {
+    const updateManagerwithId = updateManager.bind(null, manager.managerId);
+    const headers = await authHeaders();
+    const responseStores = await fetch(`${API_URL}/locations`, {
+        headers: {
+            ...headers
+        }
+    })
+    const stores = await responseStores.json();
     return (
-        <form action={updateManagerWithId} className="bg-oranger-400 rounded-md">
-            <h1>Actualizar Manager</h1>
-            <Input defaultValue={manager.managerFullName}
-            placeholder="Marco Aurelio"
-            name="managerFullName"
+        <form onSubmit={(e) => { 
+            e.preventDefault(); 
+            const formData = new FormData(e.currentTarget);
+            updateManager(manager.managerId, formData); 
+        }} className="bg-orange-400 rounded-md flex flex-col flex-grow-0 gap-2">
+            <h1> Actualizar Manager </h1>
+            <Input
+                required={true}
+                label="Nombre completo" 
+                defaultValue="{manager.managerFullName}"
+                placeholder="Marco Aurelio"
+                name="managerFullName"
             />
-            <Input defaultValue={manager.managerEmail}
-            placeholder="manager@ocso.com"
-            name="managerEmail"
+            <Input
+                required={true}
+                label="Correo Electrónico" 
+                defaultValue="{manager.managerEmail}"
+                placeholder="maurelio@gmail.com"
+                name="managerEmail"
             />
-            <Input defaultValue={String(manager.managerSalary)}
-            placeholder="manager@ocso.com"
-            name="12000"
+            <Input
+                required={true}
+                label="Salario" 
+                defaultValue="{String(manager.managerSalary)}"
+                placeholder="12000"
+                name="Salario"
             />
-            <Input defaultValue={manager.managerPhoneNumber}
-            placeholder="manager@ocso.com"
-            name="4421333617"
+            <Input
+                required={true}
+                label="Número de teléfono" 
+                defaultValue="{String(manager.managerPhoneNumber)}"
+                placeholder="4425874686"
+                name="Telefono"
             />
-            <Button color="primary" type="submit">Actualizar</Button>
+            <SelectStore
+                stores={stores}
+                defaultStore={manager?.location?.locationId}
+            />
+            <Button color="primary" type="submit" className="bg-orange-500">
+                Actualizar
+            </Button>
         </form>
-
     )
-
 }
