@@ -1,12 +1,9 @@
-import ManagerCards from "./_components/ManagerCards";
-
 const ManagersPage = async () => {
     return (
-        <div className="w-4/12 h-[90vh] max-h-[90vh] overflow-y-auto">
-            <ManagerCards/>
+        <div className="flex flex-col items-center justify-center h-full w-full text-gray-400 text-xl">
+            Selecciona un manager para ver o editar su información.
         </div>
-    )
-}
-
+    );
+};
 
 export default ManagersPage;

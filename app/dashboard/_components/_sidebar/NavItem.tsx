@@ -1,28 +1,23 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 interface NavItemProps{
-    icon: ReactNode
-    path: string
+    icon: JSX.Element;
+    path: string;
+
 }
 
-
-
-
-const NavItem = ({icon, path}: NavItemProps) =>{
+export const NavItem = ({ icon, path }: NavItemProps) => {
     const pathName = usePathname();
-    return(
-
-        <Link href={path} className="w-full flex justify-center"> 
-        <span className={pathName === path ? "bg-orange-400 w-10/12 flex justify-center rounded-md transition-colors py-2" : "w-10/12 py-2"}>{icon}</span>
+    const isActive = pathName === path;
+    return (
+        <Link href={path} className="w-full flex justify-center">
+            <span className={`w-12 h-12 flex items-center justify-center rounded-lg transition-colors
+                ${isActive ? 'bg-orange-500 text-white shadow' : 'text-gray-400 hover:bg-gray-100'}`}>
+                {icon}
+            </span>
         </Link>
-    )
+    );
 }
-
-
-
-
-
-export default NavItem;

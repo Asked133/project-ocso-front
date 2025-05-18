@@ -10,8 +10,29 @@ const ProductsPage = async () => {
         headers: {
             ...(await (authHeaders())),
         }
-    })
-    const providers = await responseProviders.json()
+    });
+    const data = await responseProviders.json();
+    console.log("API providers response:", data);
+
+    let providers: any[] = [];
+    if (Array.isArray(data)) {
+        providers = data;
+    } else if (Array.isArray(data?.data)) {
+        providers = data.data;
+    } else if (Array.isArray(data?.providers)) {
+        providers = data.providers;
+    }
+
+    // Si no tienes autorización o no hay proveedores válidos, muestra solo el mensaje de error
+    if (!Array.isArray(providers) || providers.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center h-full w-full text-red-500 text-xl">
+                No tienes autorización para ver los proveedores.<br />
+                {data?.message && <span className="text-base text-gray-500">{data.message}</span>}
+            </div>
+        );
+    }
+
     return (
         <>
 
@@ -34,3 +55,4 @@ const ProductsPage = async () => {
         </>
     );
 };
+export default ProductsPage;
