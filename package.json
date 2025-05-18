@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@heroui/react": "^2.7.5",
-    "@nextui-org/react": "^2.6.11",
     "cookie-parser": "^1.4.7",
     "framer-motion": "^12.5.0",
+    "generate-password": "^1.7.1",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",

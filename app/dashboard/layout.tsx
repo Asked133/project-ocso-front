@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Header from "./_components/Header";
+import React from "react";
 import Sidebar from "./_components/_sidebar/Sidebar";
 
 export default function LayoutDashbord({

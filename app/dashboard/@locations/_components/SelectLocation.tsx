@@ -1,40 +1,38 @@
-"use client";
-import { Location } from "@/entities";
-import { Select, SelectItem } from "@heroui/react";
-import { use } from "react";
+'use client';
 import { useRouter } from "next/navigation";
-
+import { Select, SelectItem } from "@heroui/react";
+import { Location } from "@/entities";
 export default function SelectLocation({
-  locations, store
-}: {
-  locations: Location[], store: string | string[] | undefined;
+    locations, 
+    store 
+}: { 
+    locations: Location[], 
+    store: string | string[] | undefined 
 }) {
-  const router = useRouter();
-  return (
-    <Select
-      placeholder="Selecciona una tienda"
-      label="Tienda"
-      classNames={{
-        mainWrapper: "hover:ring-2 ring-red-500 rounded-xl transition-all",
-      }}
-      selectedKeys={store ? store: "0"}
-      onChange={((e) => {
-        if (e.target.value === "0" || e.target.value === "") {
-          router.push(`/dashboard`);
-        }else{
-        router.push(`/dashboard?store=${e.target.value}`);
-        }})}
-    >
-      {locations.map((location: Location) => {
-        return (
-          <SelectItem
-            key={location.locationId}
-            data-value={location.locationId}
-          >
-            {location.locationName}
-          </SelectItem>
-        );
-      })}
-    </Select>
-  );
+    
+    const router = useRouter();
+    return (
+        <Select placeholder="Selecciona una tienda"
+            label="Tienda"
+            classNames={{
+                mainWrapper: "hover:ring-2 ring-red-300 rounded-x1 transition-all",
+            }}
+            selectedKeys={store ? store : "0"}
+            onChange={((e) => {
+                if (e.target.value === "0" || e.target.value === "") {
+                    router.push('/dashboard')
+                } else {
+                    router.push(`/dashboard/@locations/${e.target.value}`);
+                }
+            })}
+        >
+            {locations.map((location) => {
+                return (
+                    <SelectItem key={location.locationId}>
+                        {location.locationName}
+                    </SelectItem>
+                );
+            })}
+        </Select>
+    )
 }
