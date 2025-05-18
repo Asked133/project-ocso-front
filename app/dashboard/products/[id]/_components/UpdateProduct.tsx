@@ -3,6 +3,7 @@ import { Product } from "@/entities";
 import { Button, Input } from "@heroui/react";
 import SelectProvider from "../../_components/SelectProvider";
 import { Provider } from "@/entities"
+
 import { LuCheck } from "react-icons/lu";
 import DeleteProduct from "./DeleteProduct";
 
